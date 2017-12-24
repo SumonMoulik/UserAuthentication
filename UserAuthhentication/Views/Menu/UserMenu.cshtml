@@ -1,0 +1,59 @@
+﻿@model UserAuthhentication.Models.UserMenu
+
+@{
+    ViewBag.Title = "User Menu";
+}
+
+<script src="~/Scripts/AppJS/Users/UserMenu.js"></script>
+
+<h4><u>User Menu Setup</u></h4>
+<style>
+    table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 20%;
+    }
+
+    td, th {
+        border: 1px solid #dddddd;
+        text-align: left;
+        padding: 8px;
+    }
+
+    tr:nth-child(odd) {
+        background-color: #dddddd;
+    }
+
+    table, th, td {
+        border: 1px solid black;
+    }
+</style>
+
+
+
+@*<%if (1==1) { %> <% } %>*@
+<div class="row">
+    <div class="form-horizontal col-sm-10">
+        @using (Html.BeginForm())
+        {
+            <div class="form-group">
+                @Html.LabelFor(m => m.UserId, "Employee", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.UserId, (SelectList)ViewData["vdUserList"], "--Select Employee--", new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group ">
+                @Html.LabelFor(m => m.UserMenuId, "Main Menu", new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-3">
+                    @Html.DropDownListFor(m => m.UserMenuId, (SelectList)ViewData["vdMainMenu"], "--Select Menu--", new { @class = "form-control" })
+                </div>
+                <div class="table table-responsive">
+                    <table id="Menus"></table>
+                </div>
+                <div class="col-sm-offset-5 col-sm-3">
+                    <input type="submit" value="Save User Menu" class="btn btn-primary" id="btnSave" style="margin-top:1%;" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

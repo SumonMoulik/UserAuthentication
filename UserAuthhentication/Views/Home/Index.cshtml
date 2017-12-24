@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<div class="jumbotron">
+    <p class="lead">Welcome to user authentication systems.</p>
+</div>
+<script>
+    var userId = sessionStorage.getItem("UserId");
+    if (userId == "null")
+        window.location = '/Home/Login'
+</script>

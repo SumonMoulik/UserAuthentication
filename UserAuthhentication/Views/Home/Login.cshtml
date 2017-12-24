@@ -1,0 +1,37 @@
+﻿@using UserAuthhentication.Models
+@model Login
+@{
+    ViewBag.Title = "Login";
+}
+<script src="~/Scripts/AppJS/Users/UserLogin.js"></script>
+<div class="row" style="margin-top:10%;">
+    <label class="col-md-offset-3 col-md-10" id="loginError" style="color:red;font-size:20px;" hidden>Email or password is not correct</label>
+    <div class="form-horizontal col-md-offset-2 col-md-10">
+        @using (Html.BeginForm(FormMethod.Post))
+            {
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                <div class="col-md-10">
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+                <div class="form-group">
+                    <div class="col-md-offset-3 col-md-3">
+                        <input type="submit" value="Log In" class="btn btn-primary" id="btnLogin" />
+                    </div>
+                </div>
+        }
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

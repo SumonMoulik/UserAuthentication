@@ -1,0 +1,86 @@
+﻿@{
+    List<UserAuthhentication.Models.Menu> userMenu = ViewBag.Menu;
+}
+<style>
+    #navigation ul li:hover ul {
+        visibility: visible;
+    }
+
+    #navigation li:hover > ul {
+        display: block;
+    }
+
+    ul, ul li {
+        list-style-type: none;
+        float: left;
+        padding: 0px;
+    }
+
+        ul li a {
+            text-decoration: none;
+        }
+
+    li ul {
+        display: none;
+        position: absolute;
+    }
+
+        li ul li {
+            float: none;
+        }
+
+    ul li:hover ul {
+        display: block;
+    }
+
+        ul li:hover ul ul {
+            display: none;
+        }
+
+    ul li ul li:last-child:hover ul {
+        display: block;
+    }
+</style>
+<div id="navigation">
+    <ul class="menu">
+        @{
+            if (userMenu != null)
+            {
+                var Parent = userMenu.Where(m => m.ParentId == "ROOT");
+
+                foreach (var itemparent in Parent)
+                {
+                    var childitem = userMenu.Where(m => m.ParentId == itemparent.MenuCode);
+                    if (childitem.Count() == 0)
+                    {
+                        <li style="margin-right:1%;margin-top:1%;"><a href='@itemparent.MenuUrl'><span>@itemparent.MenuText</span></a></li>
+                    }
+                    else
+                    {
+                        <li class='active has-sub' style="margin-right:1%;margin-top:1%;">
+                            <a href='@itemparent.MenuUrl'><span>@itemparent.MenuText</span></a>
+                            @if (childitem.Count() > 0)
+                            {
+                                <ul>
+                                    @foreach (var itemchild in childitem)
+                                    {
+                                        <li class='last'>
+                                            <a href='@itemchild.MenuUrl'><span>@itemchild.MenuText</span></a>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                }
+                <li style="margin-left:1%;margin-top:1%;" onclick="SetUser();"><a href='/Home/Logout'><span>Logout</span></a></li>
+            }
+        }
+    </ul>
+</div>
+<script>
+    function SetUser() {
+        sessionStorage.setItem("UserId", null);
+    }
+</script>
+
