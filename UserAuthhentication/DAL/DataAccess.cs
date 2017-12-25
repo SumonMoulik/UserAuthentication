@@ -9,7 +9,7 @@ namespace UserAuthhentication.DAL
     public class DataAccess
     {
         private static SqlConnection sqlConn = null;
-        string connectionString = "Data Source=DESKTOP-TI5AOPR;Initial Catalog=UserAuthentication_DB;Integrated Security=True";
+        string connectionString = "Data Source=(local);Initial Catalog=UserAuthentication_DB;Integrated Security=True";
         public DataAccess()
         {
             //
